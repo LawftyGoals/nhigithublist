@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import '../DetailsPage.css';
+import '../cssModules/DetailsPage.css';
+import { useLocation } from "react-router-dom";
 
 
 const RepoList = (props) => (
@@ -22,7 +23,7 @@ const UserPage = (props) => (
         <div className="header">
             {props.useData.userData.login}
         </div>
-        <div className="github-profile">
+        <div className="profile">
             <img src={props.useData.userData.avatar_url} />
             <div className="info">
                 <div className="name">
@@ -42,7 +43,7 @@ const UserPage = (props) => (
 );
 
 const DataFetcher = (props) => {
-    const setUseData = props.setUseData;
+    
     useEffect(() => {
         const dataFetcher= async () => {
             const response = await fetch(props.user);
@@ -50,7 +51,7 @@ const DataFetcher = (props) => {
             const responseRepos= await fetch(data.repos_url + "?per_page=" + data.public_repos);
             const repos = await responseRepos.json();
 
-            setUseData({
+            props.setUseData({
                 userData: data,
                 userRepos: repos,
             });
@@ -63,6 +64,8 @@ const DataFetcher = (props) => {
 
 
 const DetailsPage = (props) => {
+    const location = useLocation();
+    const {from} =location.state;
     
 
     const [useData, setUseData] = useState(
@@ -76,7 +79,7 @@ const DetailsPage = (props) => {
 
     return(
         <div>
-            <DataFetcher user={props.user} setUseData={setUseData} />
+            <DataFetcher user={from} setUseData={setUseData} />
             <div>
              <div>
                 {!useData.userRepos ? <div>Loading...</div>:<UserPage useData = {useData}/>}
