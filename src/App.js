@@ -1,15 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect} from "react";
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-
-
 
 const UserList = (props) => {
   return(
-    <div>
+    <div className="card">
       {props.dataList.map(element => <Card key={element.id} {...element} />)}
     </div>
   );
@@ -19,11 +13,11 @@ const UserList = (props) => {
 const Card = (props)=>{
   const user = props;
   return(
-    <div>
+    <div className="github-profile">
       <img src={user.avatar_url} />
-      <div>
-        <a href={user.html_url} target="_blank">{user.login}</a>
-        <div>
+      <div className="info">
+        <a className="name" href={user.html_url} target="_blank">{user.login}</a>
+        <div className="name">
           User ID: {user.id}
         </div>
         <div>
@@ -58,7 +52,7 @@ const App = (props) => {
     return(
       <div>
         <DataFetcher setDataList={setDataList}/>
-        <div>{props.title}</div>
+        <div className="header">{props.title}</div>
         <div>{!dataList ? (<div>Loading...</div>) : (<UserList dataList={dataList} />)}</div>
       </div>
     );
