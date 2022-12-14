@@ -34,13 +34,13 @@ const Card = (props)=>{
 }
 
 const DataFetcher = props => {
-  
-
-  useEffect(() => {
+    useEffect(() => {
       const fetchData = async () => {
+        
         const response = await fetch('https://api.github.com/users?since=0&per_page=20');
         const data = await response.json();
 
+        props.setResponseOK({response: response.ok});
         props.setDataList(data);
       };
 
@@ -51,12 +51,15 @@ const DataFetcher = props => {
 
 const Home = (props) => {
   const [dataList, setDataList] = useState();
+  const [responseOK, setResponseOK] = useState({response: false});
   
+  console.log(!dataList);
+
     return(
       <div>
-        <DataFetcher setDataList={setDataList}/>
+        <DataFetcher setDataList={setDataList} setResponseOK={setResponseOK}/>
         <div className="header">{props.title}</div>
-        <div>{!dataList ? (<div>Loading...</div>) : (<UserList dataList={dataList} />)}</div>
+        <div>{responseOK.response === false ? (<div style={{textAlign:"center"}} >Loading...</div>) : (<UserList dataList={dataList} />)}</div>
       </div>
     );
 }

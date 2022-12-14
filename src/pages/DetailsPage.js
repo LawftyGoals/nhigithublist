@@ -82,7 +82,7 @@ const DetailsPage = (props) => {
             <DataFetcher user={from} setUseData={setUseData} />
             <div>
              <div>
-                {!useData.userRepos ? <div>Loading...</div>:<UserPage useData = {useData}/>}
+                {!useData.userRepos ? <div style={{textAlign:"center"}}>Loading...</div>:<UserPage useData = {useData}/>}
             </div>   
             </div>
         </div>
