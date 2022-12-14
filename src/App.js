@@ -17,7 +17,24 @@ const UserList = (props) => {
 
 
 const Card = (props)=>{
-  console.log(props);
+  const user = props;
+  return(
+    <div>
+      <img src={user.avatar_url} />
+      <div>
+        <a href={user.html_url} target="_blank">{user.login}</a>
+        <div>
+          User ID: {user.id}
+        </div>
+        <div>
+          <a href="#">Details</a>
+        </div>
+        <div>
+          <a href="#">Go to Top</a>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 const DataFetcher = props => {
