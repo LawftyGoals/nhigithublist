@@ -23,11 +23,10 @@ const Card = (props)=>{
         <div>
           <a href="#">Details</a>
         </div>
-        <div>
-          <a href="#">Go to Top</a>
-        </div>
       </div>
+      <a className="gototop" href="#">Go to Top</a>
     </div>
+    
   );
 }
 

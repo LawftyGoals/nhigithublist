@@ -23,6 +23,7 @@
   margin-left: 12px;
 	
 }
+
 .github-profile .info .name {
   font-size: 2rem;
   font-weight: bold;
@@ -30,6 +31,11 @@
 
 .github-profile .info .id {
   font-size: 1.25rem;
+}
+
+.github-profile .gototop {
+  font-size: 1.25rem;
+  float: right;
 }
 
 form {
