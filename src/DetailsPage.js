@@ -2,12 +2,17 @@ import './App.css';
 import React, {useState, useEffect} from "react";
 
 
+const RepoList = (props) => (
+    <div>
+        {props.userRepos.map(repo => <RepoLink key={repo.id} {...repo} />)}
+    </div>
+);
 
 const RepoLink = (props) => {
 
     return(
         <div>
-            <a href={props.userRepos.html_url} target="_blank">{props.userRepos.name}</a>
+            <a href={props.html_url} target="_blank">{props.name}</a>
         </div>
     );
 }
@@ -24,7 +29,7 @@ const UserPage = (props) => (
                     {props.useData.userData.name}
                 </div>
                 <div>
-                    <RepoLink userRepos={props.useData.userRepos[0]}/>
+                    <RepoList userRepos={props.useData.userRepos}/>
                 </div>
             </div>
         </div>
