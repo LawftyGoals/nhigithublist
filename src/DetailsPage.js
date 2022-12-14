@@ -2,6 +2,16 @@ import './App.css';
 import React, {useState, useEffect} from "react";
 
 
+
+const RepoLink = (props) => {
+
+    return(
+        <div>
+            <a href={props.userRepos.html_url} target="_blank">{props.userRepos.name}</a>
+        </div>
+    );
+}
+
 const UserPage = (props) => (
     <div>
         <div>
@@ -12,6 +22,9 @@ const UserPage = (props) => (
             <div>
                 <div>
                     {props.useData.userData.name}
+                </div>
+                <div>
+                    <RepoLink userRepos={props.useData.userRepos[0]}/>
                 </div>
             </div>
         </div>
@@ -43,18 +56,18 @@ const DetailsPage = (props) => {
     const [useData, setUseData] = useState(
         {
             userData: null,
-            userRepo: null,
+            userRepos: null,
         }
     );
 
-    console.log(useData.userData);
+    //console.log(useData.userData);
 
     return(
         <div>
             <DataFetcher user={props.user} setUseData={setUseData} />
             <div>
              <div>
-                <UserPage useData = {useData}/>
+                {!useData.userRepos ? <div>Loading...</div>:<UserPage useData = {useData}/>}
             </div>   
             </div>
         </div>
