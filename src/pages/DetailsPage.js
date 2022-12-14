@@ -1,5 +1,5 @@
-import './App.css';
 import React, {useState, useEffect} from "react";
+import '../DetailsPage.css';
 
 
 const RepoList = (props) => (
@@ -12,23 +12,28 @@ const RepoLink = (props) => {
 
     return(
         <div>
-            <a href={props.html_url} target="_blank">{props.name}</a>
+            <a href={props.html_url} target="_blank" rel="noreferrer">{props.name}</a>
         </div>
     );
 }
 
 const UserPage = (props) => (
     <div>
-        <div>
+        <div className="header">
             {props.useData.userData.login}
         </div>
-        <div>
+        <div className="github-profile">
             <img src={props.useData.userData.avatar_url} />
-            <div>
-                <div>
+            <div className="info">
+                <div className="name">
                     {props.useData.userData.name}
                 </div>
-                <div>
+                <div className="text">
+                    Public Repo Count: {props.useData.userData.public_repos}
+                    <br />
+                    Repositories:
+                </div>
+                <div style={{padding:5 + "px"}}>
                     <RepoList userRepos={props.useData.userRepos}/>
                 </div>
             </div>
@@ -37,14 +42,15 @@ const UserPage = (props) => (
 );
 
 const DataFetcher = (props) => {
+    const setUseData = props.setUseData;
     useEffect(() => {
         const dataFetcher= async () => {
             const response = await fetch(props.user);
             const data = await response.json();
-            const responseRepos= await fetch(data.repos_url);
+            const responseRepos= await fetch(data.repos_url + "?per_page=" + data.public_repos);
             const repos = await responseRepos.json();
 
-            props.setUseData({
+            setUseData({
                 userData: data,
                 userRepos: repos,
             });
@@ -57,6 +63,7 @@ const DataFetcher = (props) => {
 
 
 const DetailsPage = (props) => {
+    
 
     const [useData, setUseData] = useState(
         {

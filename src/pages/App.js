@@ -1,4 +1,4 @@
-import './App.css';
+import '../App.css';
 import React, {useState, useEffect} from "react";
 
 const UserList = (props) => {
@@ -16,7 +16,7 @@ const Card = (props)=>{
     <div className="github-profile">
       <img src={user.avatar_url} />
       <div className="info">
-        <a className="name" href={user.html_url} target="_blank">{user.login}</a>
+        <a className="name" href={user.html_url} target="_blank" rel="noreferrer">{user.login}</a>
         <div className="name">
           User ID: {user.id}
         </div>
@@ -31,6 +31,7 @@ const Card = (props)=>{
 }
 
 const DataFetcher = props => {
+  
 
   useEffect(() => {
       const fetchData = async () => {
