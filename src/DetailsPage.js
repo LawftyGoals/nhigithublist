@@ -2,6 +2,22 @@ import './App.css';
 import React, {useState, useEffect} from "react";
 
 
+const UserPage = (props) => (
+    <div>
+        <div>
+            {props.useData.userData.login}
+        </div>
+        <div>
+            <img src={props.useData.userData.avatar_url} />
+            <div>
+                <div>
+                    {props.useData.userData.name}
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
 const DataFetcher = (props) => {
     useEffect(() => {
         const dataFetcher= async () => {
@@ -37,7 +53,9 @@ const DetailsPage = (props) => {
         <div>
             <DataFetcher user={props.user} setUseData={setUseData} />
             <div>
-
+             <div>
+                <UserPage useData = {useData}/>
+            </div>   
             </div>
         </div>
     );
